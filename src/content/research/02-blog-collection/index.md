@@ -1,6 +1,6 @@
 ---
-title: "Blog Collection"
-description: "How to add posts to the blog."
+title: "Research Collection"
+description: "How to add entries to research."
 date: "2024-03-21"
 tags:
   - tutorial
@@ -8,33 +8,33 @@ tags:
 
 ---
 
-## Working with the `blog` collection:
+## Working with the `research` collection:
 
-The `blog` collection is found in `src/content/blog`.
+The `research` collection is found in `src/content/research`.
 
 ```
-📁 /src/content/blog
-└── 📁 post-1
+📁 /src/content/research
+└── 📁 entry-1
       └── 📄 index.md
-└── 📁 post-2
+└── 📁 entry-2
       └── 📄 index.mdx
 ```
 
-In the above example, two blog posts will be generated with the folder name representing the id.
+In the above example, two research entries will be generated with the folder name representing the id.
 
-- `https://example.com/blog/post-1`
-- `https://example.com/blog/post-2`
+- `https://example.com/research/entry-1`
+- `https://example.com/research/entry-2`
 
 ---
 
 ## Provide metadata
 
-Metadata is required for each post.
+Metadata is required for each entry.
 
 ```astro
 ---
-title: "Blog Collection";
-description: "How to add posts to the blog.";
+title: "Research Collection";
+description: "How to add entries to research.";
 date: "2024-03-21";
 draft: false;
 tags:
@@ -56,14 +56,14 @@ All that's left to do is write the content under the metadata.
 
 ```astro
 ---
-title: "Blog Collection";
-description: "How to add posts to the blog.";
+title: "Research Collection";
+description: "How to add entries to research.";
 date: "2024-03-21";
 draft: false;
 tags:
   - tutorial
 ---
 
-## Working with the blog collection
+## Working with the research collection
 <!-- content -->
 ```

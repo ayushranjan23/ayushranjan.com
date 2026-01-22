@@ -5,6 +5,7 @@ import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
 import { readingTime } from "@lib/utils";
 import BackToPrevious from "@components/BackToPrevious.astro";
+import PostNavigation from "@components/PostNavigation.astro";
 import Link from "@components/Link.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 import Giscus from "@components/Giscus.astro";
@@ -19,6 +20,33 @@ export async function getStaticPaths() {
   }));
 }
 type Props = CollectionEntry<"projects">;
+
+const projects = (await getCollection("projects"))
+  .filter((project) => !project.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function getNextProject() {
+  let projectIndex;
+  for (const project of projects) {
+    if (project.id === Astro.params.id) {
+      projectIndex = projects.indexOf(project);
+      return projects[projectIndex + 1];
+    }
+  }
+}
+
+function getPrevProject() {
+  let projectIndex;
+  for (const project of projects) {
+    if (project.id === Astro.params.id) {
+      projectIndex = projects.indexOf(project);
+      return projects[projectIndex - 1];
+    }
+  }
+}
+
+const nextProject = getNextProject();
+const prevProject = getPrevProject();
 
 const project = Astro.props;
 const { Content, headings } = await render(project);
@@ -65,6 +93,9 @@ const { Content, headings } = await render(project);
     <TableOfContents headings={headings} />
     <article class="animate">
       <Content />
+      <div class="mt-24">
+        <PostNavigation prevPost={prevProject} nextPost={nextProject} />
+      </div>
       <div class="mt-24">
         <Giscus />
       </div>

@@ -13,7 +13,7 @@ export const HOME: Metadata = {
   DESCRIPTION: "My name is Ayush and I like to research and learn engineering & business.",
 };
 
-export const BLOG: Metadata = {
+export const RESEARCH: Metadata = {
   TITLE: "Research",
   DESCRIPTION: "My research articles and papers.",
 };

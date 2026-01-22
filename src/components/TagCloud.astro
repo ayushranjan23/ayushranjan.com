@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 
-const allPosts = await getCollection("blog");
-const allTags = allPosts.map((tag) => tag.data.tags).flat();
+const allResearch = await getCollection("research");
+const allTags = allResearch.map((entry) => entry.data.tags).flat();
 
 console.log(allTags);
 ---

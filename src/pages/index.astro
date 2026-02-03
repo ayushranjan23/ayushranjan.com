@@ -12,11 +12,6 @@ const research = (await getCollection("research"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
 
-const blogs = (await getCollection("blogs"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
-
 const projects: CollectionEntry<"projects">[] = (
   await getCollection("projects")
 )
@@ -73,24 +68,6 @@ const projects: CollectionEntry<"projects">[] = (
           <ul class="not-prose flex flex-col gap-4">
             {
               research.map((post) => (
-                <li>
-                  <ArrowCard entry={post} />
-                </li>
-              ))
-            }
-          </ul>
-        </section>
-
-        <section class="animate space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              Blogs
-            </h2>
-              <Link href="/blogs"> Read All </Link>
-          </div>
-          <ul class="not-prose flex flex-col gap-4">
-            {
-              blogs.map((post) => (
                 <li>
                   <ArrowCard entry={post} />
                 </li>

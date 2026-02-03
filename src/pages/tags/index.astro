@@ -4,10 +4,12 @@ import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 
 const research = await getCollection("research", ({ data }) => !data.draft);
-const tags = [...new Set(research.flatMap((entry) => entry.data.tags || []))].sort();
+const blogs = await getCollection("blogs", ({ data }) => !data.draft);
+const allPosts = [...research, ...blogs];
+const tags = [...new Set(allPosts.flatMap((entry) => entry.data.tags || []))].sort();
 ---
 
-<Layout title="Tags" description="List of research tags.">
+<Layout title="Tags" description="List of all tags.">
   <Container>
     <div class="space-y-10">
       <h1 class="animate font-semibold">All Tags</h1>
@@ -20,7 +22,7 @@ const tags = [...new Set(research.flatMap((entry) => entry.data.tags || []))].so
             >
               {tag}{" "}
               <span class="text-sm text-gray-600">
-                ({research.filter((entry) => entry.data.tags?.includes(tag)).length})
+                ({allPosts.filter((entry) => entry.data.tags?.includes(tag)).length})
               </span>
             </a>
           ))

@@ -7,17 +7,22 @@ import Link from "@components/Link.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
-const research = (await getCollection("research"))
+const code = (await getCollection("code"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+  .slice(0, SITE.NUM_CODE_ON_HOMEPAGE);
 
-const projects: CollectionEntry<"projects">[] = (
-  await getCollection("projects")
+const xp: CollectionEntry<"xp">[] = (
+  await getCollection("xp")
 )
-  .filter((project) => !project.data.draft)
+  .filter((item) => !item.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
+  .slice(0, SITE.NUM_XP_ON_HOMEPAGE);
+
+const learn = (await getCollection("learn"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_LEARN_ON_HOMEPAGE);
 ---
 
 <Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
@@ -43,15 +48,15 @@ const projects: CollectionEntry<"projects">[] = (
         <section class="animate space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-y-2">
             <h2 class="font-semibold text-black dark:text-white">
-              Projects
+              Code
             </h2>
-            <Link href="/projects"> See All </Link>
+            <Link href="/code"> See All </Link>
           </div>
           <ul class="not-prose flex flex-col gap-4">
             {
-              projects.map((project) => (
+              code.map((post) => (
                 <li>
-                  <ArrowCard entry={project} />
+                  <ArrowCard entry={post} />
                 </li>
               ))
             }
@@ -61,13 +66,31 @@ const projects: CollectionEntry<"projects">[] = (
         <section class="animate space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-y-2">
             <h2 class="font-semibold text-black dark:text-white">
-              Research
+              Experience
             </h2>
-              <Link href="/research"> Read All </Link>
+            <Link href="/xp"> See All </Link>
           </div>
           <ul class="not-prose flex flex-col gap-4">
             {
-              research.map((post) => (
+              xp.map((item) => (
+                <li>
+                  <ArrowCard entry={item} />
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <section class="animate space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-y-2">
+            <h2 class="font-semibold text-black dark:text-white">
+              Learn
+            </h2>
+              <Link href="/learn"> Read All </Link>
+          </div>
+          <ul class="not-prose flex flex-col gap-4">
+            {
+              learn.map((post) => (
                 <li>
                   <ArrowCard entry={post} />
                 </li>

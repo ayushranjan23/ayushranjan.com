@@ -1,5 +1,5 @@
 ---
-title: "ACT"
+title: "my perfect ACT score"
 description: "i got a perfect score on the ACT and here is what i think about that"
 date: "2025-02-02"
 tags:

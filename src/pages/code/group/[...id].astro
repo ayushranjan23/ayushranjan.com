@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+import BackToPrevious from "@components/BackToPrevious.astro";
+import { CODE_GROUPS } from "@lib/groups";
+import { slugifyGroup } from "@lib/utils";
+
+export async function getStaticPaths() {
+  return CODE_GROUPS.map((group) => ({
+    params: { id: slugifyGroup(group) },
+    props: { group },
+  }));
+}
+
+const paramsId = Astro.params.id ?? "";
+const groupFromProps = (Astro.props as { group?: string })?.group;
+const group =
+  groupFromProps ??
+  CODE_GROUPS.find((value) => slugifyGroup(value) === paramsId) ??
+  paramsId;
+
+const projects = (await getCollection("code"))
+  .filter((project) => !project.data.draft && project.data.group === group)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title={`Code: ${group}`} description={`Code entries for ${group}.`}>
+  <Container>
+    <div class="space-y-10" data-pagefind-ignore>
+      <BackToPrevious href="/code">All code</BackToPrevious>
+      <h1 class="animate font-semibold text-black dark:text-white">
+        {group}
+      </h1>
+      <ul class="animate flex flex-col gap-4">
+        {
+          projects.length > 0 ? (
+            projects.map((project) => <ArrowCard entry={project} />)
+          ) : (
+            <li class="text-sm text-black/60 dark:text-white/60">
+              No entries yet.
+            </li>
+          )
+        }
+      </ul>
+    </div>
+  </Container>
+</Layout>

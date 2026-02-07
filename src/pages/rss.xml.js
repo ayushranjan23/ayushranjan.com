@@ -3,15 +3,19 @@ import { SITE } from "@consts";
 import { getCollection } from "astro:content";
 
 export async function GET(context) {
-  const research = (await getCollection("research")).filter(
+  const learn = (await getCollection("learn")).filter(
     (post) => !post.data.draft,
   );
 
-  const projects = (await getCollection("projects")).filter(
+  const code = (await getCollection("code")).filter(
     (project) => !project.data.draft,
   );
 
-  const items = [...research, ...projects].sort(
+  const xp = (await getCollection("xp")).filter(
+    (entry) => !entry.data.draft,
+  );
+
+  const items = [...learn, ...code, ...xp].sort(
     (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
   );
 

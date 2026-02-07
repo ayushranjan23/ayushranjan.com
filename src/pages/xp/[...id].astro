@@ -1,0 +1,130 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { readingTime } from "@lib/utils";
+import BackToPrevious from "@components/BackToPrevious.astro";
+import PostNavigation from "@components/PostNavigation.astro";
+import TableOfContents from "@components/TableOfContents.astro";
+import Giscus from "@components/Giscus.astro";
+import { XP_GROUPS } from "@lib/groups";
+
+export async function getStaticPaths() {
+  const entries = (await getCollection("xp"))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return entries.map((entry) => ({
+    params: { id: entry.id },
+    props: entry,
+  }));
+}
+
+type Props = CollectionEntry<"xp">;
+
+const entries = (await getCollection("xp"))
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const entry = Astro.props;
+const groupOrder = [
+  ...XP_GROUPS,
+  ...new Set(
+    entries
+      .map((item) => item.data.group)
+      .filter((group) => !XP_GROUPS.includes(group)),
+  ),
+];
+
+const getGroupEntries = (group: string) =>
+  entries.filter((item) => item.data.group === group);
+
+const resolveAdjacent = (direction: "prev" | "next") => {
+  const currentGroup = entry.data.group;
+  const currentEntries = getGroupEntries(currentGroup);
+  const currentIndex = currentEntries.findIndex(
+    (item) => item.id === entry.id,
+  );
+  const offset = direction === "next" ? 1 : -1;
+  const candidate = currentEntries[currentIndex + offset];
+  if (candidate) {
+    return candidate;
+  }
+
+  const startGroupIndex = groupOrder.indexOf(currentGroup);
+  if (startGroupIndex === -1) {
+    return undefined;
+  }
+
+  for (let step = 1; step <= groupOrder.length; step += 1) {
+    const nextIndex =
+      (startGroupIndex + offset * step + groupOrder.length) %
+      groupOrder.length;
+    const nextGroup = groupOrder[nextIndex];
+    const groupItems = getGroupEntries(nextGroup);
+    if (groupItems.length > 0) {
+      return direction === "next"
+        ? groupItems[0]
+        : groupItems[groupItems.length - 1];
+    }
+  }
+
+  return undefined;
+};
+
+const prevEntry = resolveAdjacent("prev");
+const nextEntry = resolveAdjacent("next");
+const { Content, headings } = await render(entry);
+---
+
+<Layout title={entry.data.title} description={entry.data.description}>
+  <Container>
+    <div class="animate">
+      <BackToPrevious href="/xp">Back to Experience</BackToPrevious>
+    </div>
+    <div class="animate my-10 space-y-1">
+      <div class="flex items-center gap-1.5">
+        <div class="font-base text-sm">
+          <FormattedDate date={entry.data.date} />
+        </div>
+        &bull;
+        {entry.body && (
+          <div class="font-base text-sm">
+            {readingTime(entry.body)}
+          </div>
+        )}
+      </div>
+      <h1 class="text-3xl font-semibold text-black dark:text-white">
+        {entry.data.title}
+      </h1>
+      {
+        entry.data.tags && entry.data.tags?.length > 0 ? (
+          <div class="animate flex gap-2 pt-1">
+            {entry.data.tags.map((tag) => (
+              <a
+                href={`/tags/${tag}`}
+                class="rounded-sm border border-black/15 px-2 py-1 text-sm transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"
+              >
+                {tag}
+              </a>
+            ))}
+          </div>
+        ) : null
+      }
+    </div>
+    {headings.length > 0 && <TableOfContents headings={headings} />}
+    <article class="animate">
+      <Content />
+      <div class="mt-24">
+        <PostNavigation
+          prevPost={prevEntry}
+          nextPost={nextEntry}
+          basePath="/xp"
+        />
+      </div>
+      <div class="mt-24">
+        <Giscus />
+      </div>
+    </article>
+  </Container>
+</Layout>

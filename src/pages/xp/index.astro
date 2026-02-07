@@ -4,10 +4,13 @@ import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard.astro";
 import { XP } from "@consts";
+import { XP_GROUPS } from "@lib/groups";
+import { slugifyGroup } from "@lib/utils";
 
-const xp = (await getCollection("xp"))
-  .filter((item) => !item.data.draft)
+const entries = (await getCollection("xp"))
+  .filter((entry) => !entry.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
 ---
 
 <Layout title={XP.TITLE} description={XP.DESCRIPTION}>
@@ -17,15 +20,47 @@ const xp = (await getCollection("xp"))
         <div class="animate font-semibold text-black dark:text-white">
           Experience
         </div>
-        <ul class="animate not-prose flex flex-col gap-4">
+        <div class="space-y-6">
           {
-            xp.map((item) => (
-              <li>
-                <ArrowCard entry={item} />
-              </li>
-            ))
+            XP_GROUPS.map((group) => {
+              const groupEntries = entries.filter(
+                (entry) => entry.data.group === group,
+              );
+              const topEntries = groupEntries.slice(0, 3);
+              const groupSlug = slugifyGroup(group);
+              return (
+                <section class="animate space-y-4">
+                  <div class="flex flex-wrap items-center justify-between gap-y-2">
+                    <div class="font-semibold text-black dark:text-white">
+                      {group}
+                    </div>
+                    <a
+                      href={`/xp/company/${groupSlug}`}
+                      class="text-sm text-black/60 transition-colors duration-300 ease-in-out hover:text-black dark:text-white/60 dark:hover:text-white"
+                    >
+                      Read more
+                    </a>
+                  </div>
+                  <ul class="not-prose flex flex-col gap-4">
+                    {
+                      topEntries.length > 0 ? (
+                        topEntries.map((entry) => (
+                          <li>
+                            <ArrowCard entry={entry} />
+                          </li>
+                        ))
+                      ) : (
+                        <li class="text-sm text-black/60 dark:text-white/60">
+                          No entries yet.
+                        </li>
+                      )
+                    }
+                  </ul>
+                </section>
+              );
+            })
           }
-        </ul>
+        </div>
       </div>
     </aside>
   </Container>

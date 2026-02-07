@@ -1,0 +1,65 @@
+---
+title: "Projects Collection"
+description: "How to add projects to your portfolio."
+group: "hello4"
+date: "2024-03-20"
+tags:
+  - tutorial
+---
+
+---
+
+## Working with the `projects` collection
+
+The `code` collection is found in `src/content/code`.
+
+```
+📁 /src/content/code
+└── 📁 project-1
+      └── 📄 index.md
+└── 📁 project-2
+      └── 📄 index.mdx
+```
+
+In the above example, two project posts will be generated with the folder name representing the id.
+
+- `https://example.com/code/project-1`
+- `https://example.com/code/project-2`
+
+---
+
+## Provide metadata
+
+```astro
+---
+title: "Astro Micro";
+description: "Astro Micro is an accessible theme for Astro.";
+date: "2024-03-20";
+draft: false;
+---
+```
+
+| Field       | Req | Type    | Remarks                                          |
+| :---------- | :-- | :------ | :----------------------------------------------- |
+| title       | Yes | string  | Title of the content. Used in SEO and RSS.       |
+| description | Yes | string  | Description of the content. Used in SEO and RSS. |
+| date        | Yes | string  | Must be a valid date string (able to be parsed). |
+| draft       | No  | boolean | If draft: true, content will not be published.   |
+| demoURL     | No  | string  | Link to live project demo, if available.         |
+| repoURL     | No  | string  | Link to project repo, if available.              |
+
+---
+
+All that's left to do is write the content under the metadata.
+
+```astro
+---
+title: "Astro Micro";
+description: "Astro Micro is an accessible theme for Astro";
+date: "2024-03-20";
+draft: false;
+---
+
+## Astro Micro 🔬
+<!-- content -->
+```

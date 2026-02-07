@@ -1,0 +1,129 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { readingTime } from "@lib/utils";
+import BackToPrevious from "@components/BackToPrevious.astro";
+import PostNavigation from "@components/PostNavigation.astro";
+import TableOfContents from "@components/TableOfContents.astro";
+import Giscus from "@components/Giscus.astro";
+import { LEARN_GROUPS } from "@lib/groups";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("learn"))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<"learn">;
+
+const posts = (await getCollection("learn"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const post = Astro.props;
+const groupOrder = [
+  ...LEARN_GROUPS,
+  ...new Set(
+    posts
+      .map((entry) => entry.data.group)
+      .filter((group) => !LEARN_GROUPS.includes(group)),
+  ),
+];
+
+const getGroupEntries = (group: string) =>
+  posts.filter((entry) => entry.data.group === group);
+
+const resolveAdjacent = (direction: "prev" | "next") => {
+  const currentGroup = post.data.group;
+  const currentEntries = getGroupEntries(currentGroup);
+  const currentIndex = currentEntries.findIndex(
+    (entry) => entry.id === post.id,
+  );
+  const offset = direction === "next" ? 1 : -1;
+  const candidate = currentEntries[currentIndex + offset];
+  if (candidate) {
+    return candidate;
+  }
+
+  const startGroupIndex = groupOrder.indexOf(currentGroup);
+  if (startGroupIndex === -1) {
+    return undefined;
+  }
+
+  for (let step = 1; step <= groupOrder.length; step += 1) {
+    const nextIndex =
+      (startGroupIndex + offset * step + groupOrder.length) %
+      groupOrder.length;
+    const nextGroup = groupOrder[nextIndex];
+    const entries = getGroupEntries(nextGroup);
+    if (entries.length > 0) {
+      return direction === "next"
+        ? entries[0]
+        : entries[entries.length - 1];
+    }
+  }
+
+  return undefined;
+};
+
+const prevPost = resolveAdjacent("prev");
+const nextPost = resolveAdjacent("next");
+const { Content, headings } = await render(post);
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <Container>
+    <div class="animate">
+      <BackToPrevious href="/learn">Back to learn</BackToPrevious>
+    </div>
+    <div class="my-10 space-y-1">
+      <div class="animate flex items-center gap-1.5">
+        <div class="font-base text-sm">
+          <FormattedDate date={post.data.date} />
+        </div>
+        &bull;
+        {post.body && (
+          <div class="font-base text-sm">
+            {readingTime(post.body)}
+          </div>
+        )}        
+      </div>
+      <h1 class="animate text-3xl font-semibold text-black dark:text-white">
+        {post.data.title}
+      </h1>
+      {
+        post.data.tags && post.data.tags?.length > 0 ? (
+          <div class="animate flex gap-2 pt-1">
+            {post.data.tags.map((tag) => (
+              <a
+                href={`/tags/${tag}`}
+                class="rounded-sm border border-black/15 px-2 py-1 text-sm transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"
+              >
+                {tag}
+              </a>
+            ))}
+          </div>
+        ) : null
+      }
+    </div>
+    {headings.length > 0 && <TableOfContents headings={headings} />}
+    <article class="animate">
+      <Content />
+      <div class="mt-24">
+        <PostNavigation
+          prevPost={prevPost}
+          nextPost={nextPost}
+          basePath="/learn"
+        />
+      </div>
+      <div class="mt-24">
+        <Giscus />
+      </div>
+    </article>
+  </Container>
+</Layout>

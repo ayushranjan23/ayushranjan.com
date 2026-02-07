@@ -6,91 +6,124 @@ import FormattedDate from "@components/FormattedDate.astro";
 import { readingTime } from "@lib/utils";
 import BackToPrevious from "@components/BackToPrevious.astro";
 import PostNavigation from "@components/PostNavigation.astro";
+import Link from "@components/Link.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 import Giscus from "@components/Giscus.astro";
+import { CODE_GROUPS } from "@lib/groups";
 
 export async function getStaticPaths() {
-  const posts = (await getCollection("code"))
+  const projects = (await getCollection("code"))
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-  return posts.map((post) => ({
-    params: { id: post.id },
-    props: post,
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: project,
   }));
 }
 type Props = CollectionEntry<"code">;
 
-const posts = (await getCollection("code"))
-  .filter((post) => !post.data.draft)
+const projects = (await getCollection("code"))
+  .filter((project) => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-function getNextPost() {
-  let postIndex;
-  for (const post of posts) {
-    if (post.id === Astro.params.id) {
-      postIndex = posts.indexOf(post);
-      return posts[postIndex + 1];
+const project = Astro.props;
+const groupOrder = [
+  ...CODE_GROUPS,
+  ...new Set(
+    projects
+      .map((entry) => entry.data.group)
+      .filter((group) => !CODE_GROUPS.includes(group)),
+  ),
+];
+
+const getGroupEntries = (group: string) =>
+  projects.filter((entry) => entry.data.group === group);
+
+const resolveAdjacent = (direction: "prev" | "next") => {
+  const currentGroup = project.data.group;
+  const currentEntries = getGroupEntries(currentGroup);
+  const currentIndex = currentEntries.findIndex(
+    (entry) => entry.id === project.id,
+  );
+  const offset = direction === "next" ? 1 : -1;
+  const candidate = currentEntries[currentIndex + offset];
+  if (candidate) {
+    return candidate;
+  }
+
+  const startGroupIndex = groupOrder.indexOf(currentGroup);
+  if (startGroupIndex === -1) {
+    return undefined;
+  }
+
+  for (let step = 1; step <= groupOrder.length; step += 1) {
+    const nextIndex =
+      (startGroupIndex + offset * step + groupOrder.length) %
+      groupOrder.length;
+    const nextGroup = groupOrder[nextIndex];
+    const entries = getGroupEntries(nextGroup);
+    if (entries.length > 0) {
+      return direction === "next"
+        ? entries[0]
+        : entries[entries.length - 1];
     }
   }
-}
 
-function getPrevPost() {
-  let postIndex;
-  for (const post of posts) {
-    if (post.id === Astro.params.id) {
-      postIndex = posts.indexOf(post);
-      return posts[postIndex - 1];
-    }
-  }
-}
+  return undefined;
+};
 
-const nextPost = getNextPost();
-const prevPost = getPrevPost();
-
-const post = Astro.props;
-const { Content, headings } = await render(post);
+const prevProject = resolveAdjacent("prev");
+const nextProject = resolveAdjacent("next");
+const { Content, headings } = await render(project);
 ---
 
-<Layout title={post.data.title} description={post.data.description}>
+<Layout title={project.data.title} description={project.data.description}>
   <Container>
     <div class="animate">
       <BackToPrevious href="/code">Back to code</BackToPrevious>
     </div>
-    <div class="my-10 space-y-1">
-      <div class="animate flex items-center gap-1.5">
+    <div class="animate my-10 space-y-1">
+      <div class="flex items-center gap-1.5">
         <div class="font-base text-sm">
-          <FormattedDate date={post.data.date} />
+          <FormattedDate date={project.data.date} />
         </div>
         &bull;
-        {post.body && (
+        {project.body && (
           <div class="font-base text-sm">
-            {readingTime(post.body)}
+            {readingTime(project.body)}
           </div>
-        )}        
+        )}     
       </div>
-      <h1 class="animate text-3xl font-semibold text-black dark:text-white">
-        {post.data.title}
+      <h1 class="text-3xl font-semibold text-black dark:text-white">
+        {project.data.title}
       </h1>
       {
-        post.data.tags && post.data.tags?.length > 0 ? (
-          <div class="animate flex gap-2 pt-1">
-            {post.data.tags.map((tag) => (
-              <a
-                href={`/tags/${tag}`}
-                class="rounded-sm border border-black/15 px-2 py-1 text-sm transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"
-              >
-                {tag}
-              </a>
-            ))}
-          </div>
-        ) : null
+        (project.data.demoURL || project.data.repoURL) && (
+          <nav class="flex gap-1">
+            {project.data.demoURL && (
+              <Link href={project.data.demoURL} external>
+                demo
+              </Link>
+            )}
+            {project.data.demoURL && project.data.repoURL && <span>/</span>}
+            {project.data.repoURL && (
+              <Link href={project.data.repoURL} external>
+                repo
+              </Link>
+            )}
+          </nav>
+        )
       }
     </div>
-    {headings.length > 0 && <TableOfContents headings={headings} />}
+    <TableOfContents headings={headings} />
     <article class="animate">
       <Content />
       <div class="mt-24">
-        <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+        <PostNavigation
+          prevPost={prevProject}
+          nextPost={nextProject}
+          basePath="/code"
+        />
       </div>
       <div class="mt-24">
         <Giscus />

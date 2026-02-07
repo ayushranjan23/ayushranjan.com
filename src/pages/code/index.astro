@@ -1,52 +1,64 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard.astro";
 import { CODE } from "@consts";
+import { CODE_GROUPS } from "@lib/groups";
+import { slugifyGroup } from "@lib/utils";
 
-const data = (await getCollection("code"))
-  .filter((post) => !post.data.draft)
+const projects = (await getCollection("code"))
+  .filter((project) => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-type Acc = {
-  [year: string]: CollectionEntry<"code">[];
-};
-
-const posts = data.reduce((acc: Acc, post) => {
-  const year = post.data.date.getFullYear().toString();
-  if (!acc[year]) {
-    acc[year] = [];
-  }
-  acc[year].push(post);
-  return acc;
-}, {});
-
-const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
 ---
 
 <Layout title={CODE.TITLE} description={CODE.DESCRIPTION}>
   <Container>
     <aside data-pagefind-ignore>
       <div class="space-y-10">
-        <div class="space-y-4">
+        <div class="animate font-semibold text-black dark:text-white">
+          Code
+        </div>
+        <div class="space-y-6">
           {
-            years.map((year) => (
-              <section class="animate space-y-4">
-                <div class="font-semibold text-black dark:text-white">
-                  {year}
-                </div>
-                <div>
+            CODE_GROUPS.map((group) => {
+              const groupProjects = projects.filter(
+                (project) => project.data.group === group,
+              );
+              const topProjects = groupProjects.slice(0, 3);
+              const groupSlug = slugifyGroup(group);
+              return (
+                <section class="animate space-y-4">
+                  <div class="flex flex-wrap items-center justify-between gap-y-2">
+                    <div class="font-semibold text-black dark:text-white">
+                      {group}
+                    </div>
+                    <a
+                      href={`/code/group/${groupSlug}`}
+                      class="text-sm text-black/60 transition-colors duration-300 ease-in-out hover:text-black dark:text-white/60 dark:hover:text-white"
+                    >
+                      Read more
+                    </a>
+                  </div>
                   <ul class="not-prose flex flex-col gap-4">
-                    {posts[year].map((post) => (
-                      <li>
-                        <ArrowCard entry={post} />
-                      </li>
-                    ))}
+                    {
+                      topProjects.length > 0 ? (
+                        topProjects.map((project) => (
+                          <li>
+                            <ArrowCard entry={project} />
+                          </li>
+                        ))
+                      ) : (
+                        <li class="text-sm text-black/60 dark:text-white/60">
+                          No entries yet.
+                        </li>
+                      )
+                    }
                   </ul>
-                </div>
-              </section>
-            ))
+                </section>
+              );
+            })
           }
         </div>
       </div>

@@ -86,7 +86,8 @@
 
   article ul,
   article ol {
-    @apply pl-6;
+    list-style-position: inside;
+    @apply pl-0;
   }
 
   article li::marker {

@@ -2,7 +2,7 @@
 title: "Freelance Product Engineer"
 description: "Built landing pages, internal tools, and checkout flows for early-stage teams."
 group: "jamesway"
-date: 2025-11-10
+date: 2025-09-21
 tags: ["freelance", "frontend", "shipping"]
 ---
 

@@ -83,6 +83,15 @@
     @apply text-black dark:text-white;
     @apply decoration-black/50 dark:decoration-white/50;
   }
+
+  article ul,
+  article ol {
+    @apply pl-6;
+  }
+
+  article li::marker {
+    @apply text-black/60 dark:text-white/60;
+  }
 }
 
 .animate {

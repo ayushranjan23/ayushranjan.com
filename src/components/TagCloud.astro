@@ -1,12 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 
-const allLearn = await getCollection("learn");
-const allCode = await getCollection("code");
-const allXp = await getCollection("xp");
-const allTags = [...allLearn, ...allCode, ...allXp]
-	.map((entry) => entry.data.tags)
-	.flat();
+await getCollection("learn");
+await getCollection("code");
+await getCollection("xp");
 ---
 
 <span> </span>

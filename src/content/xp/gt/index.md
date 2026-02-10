@@ -1,12 +1,12 @@
 ---
-title: "SWE Intern @ UofT"
-description: "Chestnut Residence EPA"
-group: "University of Toronto"
+title: "SWE Co-Op @ Grant Thornton"
+description: "Accounting & Consulting Firm"
+group: "Grant Thornton"
 date: 2025-10-22
 tags: ["coop", "swe", "ai"]
 ---
 
-## intro to healthlytics
+## intro to grant thornton
 
 what it does, how it works, where i came in
 

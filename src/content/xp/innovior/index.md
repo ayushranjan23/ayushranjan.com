@@ -1,7 +1,7 @@
 ---
-title: "SWE Intern @ UofT"
-description: "Chestnut Residence EPA"
-group: "University of Toronto"
+title: "SWE Intern @ Innovior"
+description: "Enterprise Resource Planning"
+group: "Innovior Africa"
 date: 2025-10-22
 tags: ["coop", "swe", "ai"]
 ---

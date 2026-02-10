@@ -1,7 +1,7 @@
 ---
-title: "Software Engineer Co-Op"
+title: "SWE Co-Op @ JCMI"
 description: "Jamesway ChickMaster Incubator Inc."
-group: "jamesway"
+group: "Jamesway"
 date: 2025-10-22
 tags: ["coop", "swe", "ai"]
 ---

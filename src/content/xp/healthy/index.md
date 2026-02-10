@@ -1,7 +1,7 @@
 ---
-title: "SWE Co-Op @ Healthlytics"
+title: "SWE Intern @ Healthlytics"
 description: "Startup in Hospitals & Avatars"
-group: "healthlytics"
+group: "Healthlytics"
 date: 2025-10-22
 tags: ["coop", "swe", "ai"]
 ---

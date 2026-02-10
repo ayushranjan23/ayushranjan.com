@@ -21,9 +21,9 @@ export const CODE_GROUPS = [
 ];
 
 export const XP_GROUPS = [
-  "jamesway",
-  "grant thornton",
-  "healthlytics",
-  "innovior",
-  "ops",
+  "Jamesway",
+  "Grant Thornton",
+  "Healthlytics",
+  "Innovior",
+  "UofT",
 ];

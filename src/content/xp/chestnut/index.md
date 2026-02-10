@@ -1,7 +1,7 @@
 ---
 title: "SWE Co-Op @ UofT"
 description: "Chestnut Residence EPA"
-group: "UofT"
+group: "uoft"
 date: 2025-10-22
 tags: ["coop", "swe", "ai"]
 ---

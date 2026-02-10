@@ -45,18 +45,59 @@ my VP (vice president, engineering) loved it; he was pretty impressed with using
 
 
 ## f4: courses get u started, interest keeps u going
-pcb design, asking rene questions
+remember how i told you that i took a hardware course as opposed to a software one when i had the choice? let's talk about it. so the course codes i had choices for were UofT ECE295 and UofT ECE297, i took 295 which is a pcb design course; now keep in mind that the liberty to make a decision between these courses was rather erratic over the years, at least from my knowledge; thus i'm not really sure if people who are planning to pursue my path at uoft will come across the same decision. welp. anyway, i got started with a hardware course this way, even though it wasn't necessarily where the future of my career was planning to head toward ;)
+
+rene designed pcbs for jamesway incubators singlehandedly. its kinda crazy because he's the only engineer in the company with 25+ years of experience and also the only software and hardware engineer (combined); the amount of knowledge he's accumalated is genuinely outstanding in my humble opinion; one day, he took me to his lab; i was trotting around aimlessly looking for stuff to question him on since i love doing that; he then pulled out a treasure filled with dozens of books detailing the aspects of programming and engineering techniques; there it was, THERE IT WAS.
+
+i spent pretty much the entire co-op (i'm writing this after the entire thing) picking new books and exploring them; it was so much fun because i could ask rene anything and he had answers so i was just absorbing things like a sponge; i asked rene a variety of questions from pcb design choices to what this programming book does.
+
+one funny moment i recall was my interaction with rene during a fire drill and we spent half an hour talking about if he'd caused anything to go up in flames; we explored his lab after that and talk about fire hazards and the experience in itself was just amazing, to say the least
+
+one thing i wanted to point out from this experience is that the real force which pushes people forward is an interest and will to do something; i understand where people come from when they ask me about university or online courses to complete and gain experience from; but i think that just having the passion and spending some time with people who have the knowledge is far more valuable because u don't have to make the same mistakes they made and they sort of sculpt a path entirely for u, at least in my opinion.
 
 
 ## f5: coding another plc (e2e), the solids work
-for jose, coding full plc pipeline for leds end to end (post-hatching use case, early feeding)
-solidworks crate design for shfting the incubator to rene's lab
+oh yesss, more coding
+
+you know its funny, like i thought this role will have no coding and i couldn't be more wrong, i'm now a software engineer co-op, hehehe;
+
+so jose comes up to me this fine morning, i'm working for him under the hood anyway doing some parts' testing from vendors for him, i can type loads about that but i feel like this next story is more valuable ;) he tells me that he wants to show me something called "early feeding" and discuss how i can help in its process, so i'll explain early feeding (ef) to u real quick
+
+typically, the eggs are put in the incubator, the eggs hatch, we remove the chicks (baby chickens, not um ... anyway) and then give them to the farm or medical facility or whoever wants baby chickens; this is the typical and normal process; ef is just adding one more thing before the handover stage (giving them to the farm... stage), we make the chicks fat; i'm not joking i'm serious, we make them fat, by feeding them.
+
+ok how do u feed them, manually? by hand? nah bro we're engineers so what we do is we have a system that pumps their food to them (this is mechanical stuff so not my expertise) and then we have an LED that lights up at a given point of time to attract the chicks to the feeding area (ya i coded that, they trusted me w/ it omg).
+
+i mean i can definitely take u through the code and all the problems i ran through but we have other posts just for that and this is high level so all i wanna tell u is that i did this end-to-end, like literally from identifying the plc, making decisions for which is best, talking with jose abt his previous decisions, reading loads of manuals and even blowing a fuse (rene gave me another one but i got so scared i actually blew it and almost broke a display, welp); also, wanna know something? none of this would've happened if i didn't greet jose the first time i came to office and didn't tell him that i'm doing ece and want to do coding in any related field, let that sink in, let ur sponge (brain) absorb that fluid (knowledge).
+
+ok so i'll also talk a little abt solidworks here, i did a lot of solidworks and autocad electrical and autocad generally too, but to be honest, these were more of background tasks that just kept going throughout within the 4 months as i was doing even more difficult programming assignments at the forefront; i'll therefore neatly tuck this in here: i made a 3d-printed part, a stand to help move one of our machines to rene's lab, made 5 dwg sets on autoCAD, made 3 dwg sets on solidworks, and i did a lot of other small things as well, these ones i listed above were all by myself but the other things i did were mostly helping the engineers when they had work which was easy enough for their cat to do so i did that and also coded at the same time, meow meow. 
 
 ## f6: rag use-case, building muscle
-the rag project from manuals, getting to work with mike (introduce mike) and lifting stuff
+okkkk, let's talk about a time that i was in our huge plant. i wanted to give this section its own chapter just to show u that not everything is sunshine & rainbows but u can make the best out of what u have. 
+
+i was assigned labor.
+
+yeah.
+
+i was.
+
+i had to move crates around, put in some stamps on metal sheets, move sample eggs around and alot of other stuff.
+
+ok, good, now here's where the lesson comes.
+
+i met sorin here, sorin's a manufacturing engineer, he's fairly senior so i was thinking of ways to break the ice; he's romanian and i love learning languages so boom i learnt how to say a few basic phrases in romanian and that's it we were buddies in a day.
+
+here's the fun part now, since sorin is senior manufacturing, he needs help with IT or computer-based things, he was also assigned to work with the 3D printer at jcmi, hehe, see where this is going? we became buddies in debugging 3D printer issues and i was basically his tech support on call. 
+
+guess what happened next, the printer broke completely and we had to call the manufacturers (of the printer) to fix it, and... i was in charge.
+
+and then... sorin comes up to me in a week and says, we're gonna go drive to Toronto and attend this conference, i want u to come, i talked to VP, he's fine with it.
+
+did u expect that ending? from labor to getting to represent jcmi and network too? i had so much fun in the event and i'm still in touch with some people from there, bro its crazy how just a small amount of networking can literally take u places and just being positive when things don't necessarily work out (in ur opinion) changes things so quickly!
+
+also i just realized that i wanted to write abt the rag use-case here so i'll explain it very quickly: we've got huge manuals, like thousands of pages i'm not kidding i read them myself i can verify, thousands of pages, there are trends but its still a lot of content; simple solution, make a rag chatbot that's like ai on steroids and the steroids are these documents; done this before for another company so i was like i'm gonna do it here too and its gonna work. bro it didn't, well kinda, let's talk abt it next.
 
 ## f7: my rag chatbot actually worked
 rag took some time and now worked, got to talk with IT people and got attention of the big guys
 
-## f8: my board meeting w/ the cfo/coo
+## f8: my external meeting w/ cfo/coo
 board meeting with the big guys making an impact, having fun, final remarks, go sleep goodnight

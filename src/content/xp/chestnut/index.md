@@ -1,6 +1,6 @@
 ---
 title: "SWE Intern @ UofT"
-description: "Chestnut Residence EPA"
+description: "The University of Toronto"
 group: "University of Toronto"
 date: 2025-10-22
 tags: ["coop", "swe", "ai"]

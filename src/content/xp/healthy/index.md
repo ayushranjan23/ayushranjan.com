@@ -1,6 +1,6 @@
 ---
 title: "SWE Intern @ Healthlytics"
-description: "Startup in Hospitals & Avatars"
+description: "HealthlyticsAI by iQonsulting"
 group: "Healthlytics"
 date: 2025-10-22
 tags: ["coop", "swe", "ai"]

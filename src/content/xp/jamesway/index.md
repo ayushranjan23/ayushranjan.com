@@ -10,14 +10,6 @@ tags: ["coop", "swe", "ai"]
 
 i remember during my interview, my supervisor literally told me "you can do school projects if you want to during work"; i didn't really understand why he said that until the first day of real work when i stepped into office and it sunk in that jamesway isn't a software company; they manufacture incubators to hatch chickens; definitely a dream for a mechanical engineer, not software; umm, oops, i guess; but ya know what, i had a blast at jamesway and i did so much work, much more than i did in any previous coop and it was software too hehe.
 
-## why it matters
-
-so i'll tell you another story, selecting hardware over software (trust me, i'm into software); so in 2nd year of university (UofT), computer engineering students get the chance to select between a hardware and software course, we can choose one over the other and do that for a whole semester; why you ask? because UofT wanted to show us both experiences so we can make a hollistic decision; ok basically my major is electrical and computer engineering (ece) but i only care about the computer side, so UofT is like why not try an actual (non introductory) electrical course in pcb design and see if u might like it? and i was like sure buddy lets do it, no actually, i did it.
-
-the only reason i took that hardware course was because i was like might as well man, and its what landed me the jamesway co-op.
-
-i want you to take away 2 things from this, or more lol who's stopping u. 1, try new things, even tho sometimes u really don't want to, just try, like what's the worst that'll happen, u fail? then try again lol hehe and don't care abt what the mean people say; if u like something, do it, cuz if someone rlly cares for u then they won't be mean they'll actually give u real reasons and u'll get the chance to love/learn from them. 2, think deeper than the surface level, i think if u told me the job description at jamesway 2 years ago i would've never worked there because there was no software scope; but now, i'm gonna take that description and dissect it like a surgeon, because there's opportunity everywhere, no really, i mean this, think deeper and make personal connections, it works.
-
 ## what i did
 
 oh boy let's get started. so this was a 4 month coop, i'll break it down into fortnights (fortnite)s so we'll have 8 instances of 2 weeks each:
@@ -97,7 +89,47 @@ did u expect that ending? from labor to getting to represent jcmi and network to
 also i just realized that i wanted to write abt the rag use-case here so i'll explain it very quickly: we've got huge manuals, like thousands of pages i'm not kidding i read them myself i can verify, thousands of pages, there are trends but its still a lot of content; simple solution, make a rag chatbot that's like ai on steroids and the steroids are these documents; done this before for another company so i was like i'm gonna do it here too and its gonna work. bro it didn't, well kinda, let's talk abt it next.
 
 ## f7: my rag chatbot actually worked
-rag took some time and now worked, got to talk with IT people and got attention of the big guys
+
+one crucial aspect about rag is that it has a very high dependance on data; the data i used was by jcmi for jcmi so it should've been fine, right? wrong. 
+
+see you need to understand that making this rag bot on a jcmi laptop only in jcmi servers is completely fine; the only thing was that i absolutely needed processing on my own laptop, this meant that jcmi end up leaking some information through giving me access to it.
+
+uh oh.
+
+but it isn't as bad as it sounds, i actually got to meet 3 people from the IT department and we spent a really good time together; i'd always smile at them because they helped me with setting up multiple computers for both coding and design.
+
+then something funny happened, I SAW ONE OF THE IT GUYS IN THE GYM! and honestly we never even talked about work in that entire interaction which taught me that not everything is about coding.
+
+ok now that the rag project was thrown on hold i started talking to my other co-op student friend abt my ideas and then the cfo walked in and started questioning me; i had lots of fun answering her queries and then the CTO comes in too; one thing you should know is that i didn't really know that these people were from the executive board within the company, i just assumed they're regular people and talked to them like i would to anyone else.
+
+i think that's what stood out to them, and that's something else i learnt: talk to people where they are, not where you are; see i could've easily baffled these guys with technical things but do they really care about that? they want to know the high level overview and i spent quite some time giving them just that.
+
+turns out that this hour we spent together made them veto the IT decision and i got access to the files and could make the rag model, man things can't get any better; also, due to the veto, i got to talk to the IT guys again and we only talked gym; he was giving me advice on what to lift and how to benefit and i still do it to this day, getting those biceps ;)
 
 ## f8: my external meeting w/ cfo/coo
-board meeting with the big guys making an impact, having fun, final remarks, go sleep goodnight
+its the final 2 weeks. things have changed. i'm an entirely different person now, like i feel it.
+
+so now comes the board meeting with the executive team and i have everything ready; we do a practice round with the cfo who was nice enough to give us the opportunity to try things out in the room and see if everything works; for context, i was doing this presentation with the other co-op student and we were having the time of our lives.
+
+the practice round went really bad, and we got highly constructive feedback, let's talk abt it a little.
+
+actually, i'm not gonna make u read more, u read a lot so far so here's what the problem was: i was too technical. 
+
+my audience is not a group of engineers, its literally people who haven't even used tools i'm fluent with; i assumed that they knew, this is called the curse of knowledge and i learnt about it in a course; anyway.
+
+i then went back and practiced more with my other co-op friend; we made the presentation more business-like, we started talking abt how this can save hours for our employees who are trained on reading manuals, and also save time for the people who need to peruse through the content in general; we talked about ROI and other metrics to show that these stuff are worth investing in, it was really long, detailed and fun.
+
+i got grilled by one of the technical leads and he asked me a variety of questions that were super specific and technical; i kinda didn't prepare for that after our practice round but i knew what was going on within the product anyway so we got that part covered too; another learning point - practice more of what u don't know :)
+
+i like how it all circled back to the main things i learnt from this co-op, it was a fun 4 months and i wouldn't have wanted it to have gone any other way.
+
+i got a verbal return from the chief innovation officer after our board meeting and he's pretty much my manager's manager's manager so yea, definitely did go up the ladder in making a difference, but it all started with greeting everyone every morning.
+
+
+## why it matters
+
+so i'll tell you another story, selecting hardware over software (trust me, i'm into software); so in 2nd year of university (UofT), computer engineering students get the chance to select between a hardware and software course, we can choose one over the other and do that for a whole semester; why you ask? because UofT wanted to show us both experiences so we can make a hollistic decision; ok basically my major is electrical and computer engineering (ece) but i only care about the computer side, so UofT is like why not try an actual (non introductory) electrical course in pcb design and see if u might like it? and i was like sure buddy lets do it, no actually, i did it.
+
+the only reason i took that hardware course was because i was like might as well man, and its what landed me the jamesway co-op.
+
+i want you to take away 2 things from this, or more lol who's stopping u. 1, try new things, even tho sometimes u really don't want to, just try, like what's the worst that'll happen, u fail? then try again lol hehe and don't care abt what the mean people say; if u like something, do it, cuz if someone rlly cares for u then they won't be mean they'll actually give u real reasons and u'll get the chance to love/learn from them. 2, think deeper than the surface level, i think if u told me the job description at jamesway 2 years ago i would've never worked there because there was no software scope; but now, i'm gonna take that description and dissect it like a surgeon, because there's opportunity everywhere, no really, i mean this, think deeper and make personal connections, it works.

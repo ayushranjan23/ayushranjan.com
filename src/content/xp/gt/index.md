@@ -1,6 +1,6 @@
 ---
 title: "SWE Co-Op @ Grant Thornton"
-description: "Accounting & Consulting Firm"
+description: "The University of Toronto"
 group: "Grant Thornton"
 date: 2025-10-22
 tags: ["coop", "swe", "ai"]

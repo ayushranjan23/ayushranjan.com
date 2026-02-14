@@ -28,7 +28,7 @@ its not rng (random number generation) alone but there are many ways in which we
 so using some model i programmed in python, i was able to get hold of this generator that could make proper aliases for url usage that are unique and also relevant to this use case in a direct way.
 
 ## url
-got short url pe.ke, used kenyan extension from what i had previously
+i fortunately already has access to a 4 letter url, the legal limit for a url is 3 letters so i was pretty close ;)
 
 ## qr code
 used javascript qr code genrator and did some magic so that it could be a version 1 qr code and be as simple as possible, peewoop

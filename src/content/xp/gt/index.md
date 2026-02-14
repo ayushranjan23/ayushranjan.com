@@ -8,11 +8,12 @@ tags: ["coop", "swe", "ai"]
 
 ## intro to grant thornton
 
-what it does, how it works, where i came in
+if ur into finance, um, bro listen this company is super known in ur area but not that well known in the technical depths;
 
-## why it matters
+if ur not into finance, WHAT'S GOOD BUDDY, welcome to this random company i'm working at, totally not a big tech type company in a different industry;
 
-either importance of working here, or contextualize everything
+ok i'll be real, gt doesn't need any intro, its a really big firm, i worked in the india office, mostly cuz they're lenient with international kids, i was fully remote either way so yeah, have fun reading :)
+
 
 ## what i did
 
@@ -41,3 +42,7 @@ describe, don't add overly complicated code, just high level
 
 ## p8: title
 describe, don't add overly complicated code, just high level
+
+## why it matters
+
+either importance of working here, or contextualize everything

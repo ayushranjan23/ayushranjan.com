@@ -3,7 +3,7 @@ title: "SWE Intern @ Innovior"
 description: "INNOVIOR Africa Group"
 group: "Innovior Africa"
 date: 2025-10-22
-tags: ["internship", "testststts", "swe", "ai"]
+tags: ["internship", "swe", "ai"]
 ---
 
 ## about innovior
